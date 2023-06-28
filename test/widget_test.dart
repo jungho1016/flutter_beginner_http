@@ -8,10 +8,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_beginner_http/model/airresult.dart';
+import 'package:flutter_beginner/01_misae/model/airresult.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_beginner_http/main.dart';
 
 void main() {
   test('http 통신 테스트', () async {
