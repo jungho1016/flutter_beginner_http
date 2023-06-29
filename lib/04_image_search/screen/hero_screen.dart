@@ -30,7 +30,7 @@ class HeroScreen extends StatelessWidget {
         foregroundColor: Colors.black,
         elevation: 0,
       ),
-      body: Column(
+      body: ListView(
         children: [
           Container(
             child: ListTile(
@@ -44,12 +44,13 @@ class HeroScreen extends StatelessWidget {
                 ),
                 width: 80,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     IconButton(
                       onPressed: () {},
                       icon: Icon(Icons.favorite_border),
                     ),
-                    Text(likes),
+                    Expanded(child: Text(likes)),
                   ],
                 ),
               ),
