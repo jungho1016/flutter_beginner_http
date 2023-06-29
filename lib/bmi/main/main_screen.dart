@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_beginner/bmi/main/main_view_model.dart';
-import 'package:flutter_beginner/bmi/result/result_sceen.dart';
-import 'package:flutter_beginner/bmi/result/test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../route.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({Key? key}) : super(key: key);

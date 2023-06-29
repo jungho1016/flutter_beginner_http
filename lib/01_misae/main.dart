@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_beginner/01_misae/bloc/air_bloc.dart';
-import 'package:http/http.dart' as http;
 
 import 'model/air_result.dart';
 
