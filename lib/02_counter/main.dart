@@ -40,38 +40,40 @@ class _CounterState extends State<Counter> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              counterSubject.add(++counter);
-            },
-            child: Text('add'),
-          ),
-          StreamBuilder<int>(
-            stream: counterSubject.stream,
-            initialData: 0,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Text(
-                  '${snapshot.data}',
-                  style: TextStyle(
-                    fontSize: 30,
-                  ),
-                );
-              } else {
-                return Text(
-                  'No Data',
-                  style: TextStyle(
-                    fontSize: 30,
-                  ),
-                );
-              }
-            },
-          ),
-        ],
+    return Center(
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                counterSubject.add(++counter);
+              },
+              child: Text('add'),
+            ),
+            StreamBuilder<int>(
+              stream: counterSubject.stream,
+              initialData: 0,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(
+                    '${snapshot.data}',
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
+                  );
+                } else {
+                  return Text(
+                    'No Data',
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
+                  );
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

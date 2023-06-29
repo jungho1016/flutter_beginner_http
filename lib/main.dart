@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '01_misae/model/airresult.dart';
+import '01_misae/model/air_result.dart';
 
 void main() {
   runApp(const MyApp());

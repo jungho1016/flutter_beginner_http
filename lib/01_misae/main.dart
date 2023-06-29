@@ -1,13 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_beginner/01_misae/bloc/air_bloc.dart';
 import 'package:http/http.dart' as http;
 
-import 'model/airresult.dart';
+import 'model/air_result.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+final airBloc = AirBloc();
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -35,118 +38,109 @@ class Main extends StatefulWidget {
 }
 
 class _MainState extends State<Main> {
-  late AirResult _result;
-
-  Future<AirResult> fetchData() async {
-    final http.Response response = await http.get(Uri.parse(
-        'http://api.airvisual.com/v2/nearest_city?key=efdac9c1-9025-465c-8295-881319e8d497'));
-
-    final jsonString = jsonDecode(response.body);
-    AirResult result = AirResult.fromJson(jsonString);
-
-    return result;
-  }
-
   @override
   void initState() {
     super.initState();
-    fetchData().then((airResult) {
-      setState(() {
-        _result = airResult;
-      });
-    });
+    airBloc.fetch(); // airBloc을 통해 데이터를 가져오는 메소드 호출
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _result == null
-          ? Center(child: CircularProgressIndicator())
-          : Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '현재 위치 미세먼지',
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Card(
-                      child: Column(
-                        children: [
-                          Container(
-                              padding: EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text('얼굴 사진'),
-                                  Text(
-                                    '${_result.data.current.pollution.aqius}',
-                                    style: TextStyle(fontSize: 40),
-                                  ),
-                                  Text(
-                                    '보통',
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                ],
-                              ),
-                              color: Colors.yellow),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text('이미지'),
-                                    Text('${_result.data.current.weather.tp}'),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text('습도'),
-                                    Text('${_result.data.current.weather.hu}'),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text('풍속'),
-                                    Text('${_result.data.current.weather.ws}'),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 15, horizontal: 50),
-                        backgroundColor:
-                            Colors.orange, // Set the button background color
-                      ),
-                      child: Icon(
-                        Icons.refresh,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            StreamBuilder<AirResult>(
+              stream: airBloc.airResult,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return buildBody(
+                      snapshot.data!); // 데이터가 있는 경우 buildBody 함수 호출
+                } else if (snapshot.hasError) {
+                  return Text(
+                      'Error: ${snapshot.error}'); // 에러가 있는 경우 에러 메시지 표시
+                } else {
+                  return CircularProgressIndicator(); // 데이터를 기다리는 동안 로딩 인디케이터 표시
+                }
+              },
             ),
+            ElevatedButton(
+              onPressed: () {
+                airBloc.fetch();
+              },
+              child: const Icon(Icons.refresh),
+            ),
+          ],
+        ),
+      ),
     );
   }
+}
+
+Widget buildBody(AirResult _result) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Text(
+        '현재 위치 미세먼지',
+        style: TextStyle(fontSize: 30),
+      ),
+      SizedBox(
+        height: 16,
+      ),
+      Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Card(
+          child: Column(
+            children: [
+              Container(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text('얼굴 사진'),
+                      Text(
+                        '${_result.data.current.pollution.aqius}',
+                        style: TextStyle(fontSize: 40),
+                      ),
+                      Text(
+                        '보통',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  ),
+                  color: Colors.yellow),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      children: [
+                        Text('이미지'),
+                        Text('${_result.data.current.weather.tp}'),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text('습도'),
+                        Text('${_result.data.current.weather.hu}'),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text('풍속'),
+                        Text('${_result.data.current.weather.ws}'),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ]),
+  );
 }
