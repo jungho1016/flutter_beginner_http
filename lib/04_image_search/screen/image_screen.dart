@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../model/pixabay_api_model.dart';
 import '../view_model/image_view_model.dart';
 import 'hero_screen.dart';
 import '../model/image_model.dart';
 
-class ImageSearchScreen extends StatefulWidget {
-  ImageSearchScreen({Key? key}) : super(key: key);
+class ImageScreen extends StatefulWidget {
+  ImageScreen({Key? key}) : super(key: key);
 
   @override
-  State<ImageSearchScreen> createState() => _ImageSearchScreenState();
+  State<ImageScreen> createState() => _ImageScreenState();
 }
 
-class _ImageSearchScreenState extends State<ImageSearchScreen> {
+class _ImageScreenState extends State<ImageScreen> {
   TextEditingController controller = TextEditingController();
 
   @override

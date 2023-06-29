@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'screen/image_search_screen.dart';
+import 'screen/image_screen.dart';
 import 'view_model/image_view_model.dart';
 
 void main() {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => ImageViewModel(),
       child: MaterialApp(
-        home: ImageSearchScreen(),
+        home: ImageScreen(),
       ),
     );
   }
