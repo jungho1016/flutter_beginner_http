@@ -1,9 +1,16 @@
 import '../../model/image_model.dart';
 
-class ImageState {
-  final List<ImageModel> imageList;
-  ImageState({required this.imageList});
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-  ImageState copyWith({List<ImageModel>? imageList}) =>
-      ImageState(imageList: imageList ?? []);
+part 'image_state.freezed.dart';
+
+part 'image_state.g.dart';
+
+@freezed
+class ImageState with _$ImageState {
+  factory ImageState({@Default([]) List<ImageModel> imageList}) = _ImageState;
+
+  factory ImageState.fromJson(Map<String, Object?> json) =>
+      _$ImageStateFromJson(json);
 }

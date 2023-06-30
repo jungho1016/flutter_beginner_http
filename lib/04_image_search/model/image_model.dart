@@ -78,4 +78,31 @@ class ImageModel {
       userImageURL: json['userImageURL'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'pageURL': pageURL,
+      'type': type,
+      'tags': tags,
+      'previewURL': previewURL,
+      'previewWidth': previewWidth,
+      'previewHeight': previewHeight,
+      'webformatURL': webformatURL,
+      'webformatWidth': webformatWidth,
+      'webformatHeight': webformatHeight,
+      'largeImageURL': largeImageURL,
+      'imageWidth': imageWidth,
+      'imageHeight': imageHeight,
+      'imageSize': imageSize,
+      'views': views,
+      'downloads': downloads,
+      'collections': collections,
+      'likes': likes,
+      'comments': comments,
+      'user_id': userId,
+      'user': user,
+      'userImageURL': userImageURL,
+    };
+  }
 }
