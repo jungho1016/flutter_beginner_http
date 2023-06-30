@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_beginner/04_image_search/detail/hero_screen.dart';
 import 'package:provider/provider.dart';
-import '../model/image_model.dart';
+import '../../model/image_model.dart';
+import '../detail/detail_screen.dart';
 import 'image_view_model.dart';
 
 class ImageScreen extends StatefulWidget {
@@ -29,7 +29,7 @@ class _ImageScreenState extends State<ImageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final imageViewModel = context.watch<ImageViewModel>();
+    final viewModel = context.watch<ImageViewModel>();
     return Scaffold(
       appBar: AppBar(
         title: Text('이미지 검색 앱'),
@@ -54,7 +54,7 @@ class _ImageScreenState extends State<ImageScreen> {
                   icon: Icon(Icons.search),
                   onPressed: () {
                     String query = controller.text;
-                    imageViewModel.searchImages(query);
+                    viewModel.searchImages(query);
                   },
                 ),
                 suffixIconColor: Colors.blue,
@@ -68,9 +68,9 @@ class _ImageScreenState extends State<ImageScreen> {
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
               ),
-              itemCount: imageViewModel.imageList.length,
+              itemCount: viewModel.imageList.length,
               itemBuilder: (context, index) {
-                ImageModel image = imageViewModel.imageList[index];
+                ImageModel image = viewModel.imageList[index];
                 return Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: InkWell(

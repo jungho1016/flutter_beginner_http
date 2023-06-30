@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'image_model.dart';
+import '../../model/image_model.dart';
 
 class PixabayApiModel {
   Future<List<ImageModel>> getImage() async {

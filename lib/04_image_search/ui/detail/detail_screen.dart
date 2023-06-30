@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../model/image_model.dart';
+import '../../model/image_model.dart';
 
 class DetailScreen extends StatelessWidget {
   final ImageModel image;
