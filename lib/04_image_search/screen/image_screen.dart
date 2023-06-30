@@ -79,23 +79,18 @@ class _ImageScreenState extends State<ImageScreen> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => HeroScreen(
-                                  tag: '${imageViewModel.imageList[index].id},',
+                                  tag: '${image.id},',
                                   image: '${image.webformatURL}',
-                                  user:
-                                      '${imageViewModel.imageList[index].user}',
-                                  userImageURL:
-                                      '${imageViewModel.imageList[index].userImageURL}',
-                                  type:
-                                      '${imageViewModel.imageList[index].type}',
-                                  tags:
-                                      '${imageViewModel.imageList[index].tags}',
-                                  likes:
-                                      '${imageViewModel.imageList[index].likes}',
+                                  user: '${image.user}',
+                                  userImageURL: '${image.userImageURL}',
+                                  type: '${image.type}',
+                                  tags: '${image.tags}',
+                                  likes: '${image.likes}',
                                 )),
                       );
                     },
                     child: Hero(
-                      tag: imageViewModel.imageList[index].id,
+                      tag: image.id,
                       child: Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16.0),

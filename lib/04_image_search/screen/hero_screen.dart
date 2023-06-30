@@ -96,3 +96,11 @@ class HeroScreen extends StatelessWidget {
     );
   }
 }
+
+// tag: '${image.id},',
+// image: '${image.webformatURL}',
+// user: '${image.user}',
+// userImageURL: '${image.userImageURL}',
+// type: '${image.type}',
+// tags: '${image.tags}',
+// likes: '${image.likes}',
