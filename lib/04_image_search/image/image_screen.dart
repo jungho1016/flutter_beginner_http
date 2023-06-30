@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_beginner/04_image_search/detail/hero_screen.dart';
 import 'package:provider/provider.dart';
-import '../view_model/image_view_model.dart';
-import 'hero_screen.dart';
 import '../model/image_model.dart';
+import 'image_view_model.dart';
 
 class ImageScreen extends StatefulWidget {
   ImageScreen({Key? key}) : super(key: key);
@@ -78,15 +78,7 @@ class _ImageScreenState extends State<ImageScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => HeroScreen(
-                                  tag: '${image.id},',
-                                  image: '${image.webformatURL}',
-                                  user: '${image.user}',
-                                  userImageURL: '${image.userImageURL}',
-                                  type: '${image.type}',
-                                  tags: '${image.tags}',
-                                  likes: '${image.likes}',
-                                )),
+                            builder: (context) => DetailScreen(image: image)),
                       );
                     },
                     child: Hero(

@@ -1,23 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HeroScreen extends StatelessWidget {
-  final String tag;
-  final String image;
-  final String user;
-  final String userImageURL;
-  final String type;
-  final String tags;
-  final String likes;
+import '../model/image_model.dart';
 
-  HeroScreen({
+class DetailScreen extends StatelessWidget {
+  final ImageModel image;
+
+  DetailScreen({
     Key? key,
-    required this.tag,
     required this.image,
-    required this.user,
-    required this.userImageURL,
-    required this.type,
-    required this.tags,
-    required this.likes,
   }) : super(key: key);
 
   @override
@@ -35,9 +25,9 @@ class HeroScreen extends StatelessWidget {
           Container(
             child: ListTile(
               leading: CircleAvatar(
-                backgroundImage: NetworkImage(userImageURL),
+                backgroundImage: NetworkImage(image.userImageURL),
               ),
-              title: Text(user),
+              title: Text(image.user),
               trailing: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -50,20 +40,20 @@ class HeroScreen extends StatelessWidget {
                       onPressed: () {},
                       icon: Icon(Icons.favorite_border),
                     ),
-                    Expanded(child: Text(likes)),
+                    Expanded(child: Text('${image.likes}')),
                   ],
                 ),
               ),
             ),
           ),
           Hero(
-            tag: tag,
+            tag: image.tags,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16.0),
                 child: Image.network(
-                  image,
+                  image.webformatURL,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -73,7 +63,7 @@ class HeroScreen extends StatelessWidget {
             title: Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(
-                'Type: $type',
+                'Type: ${image.type}',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -83,7 +73,7 @@ class HeroScreen extends StatelessWidget {
             subtitle: Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(
-                'Tags: $tags',
+                'Tags: ${image.tags}',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

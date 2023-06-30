@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'screen/image_screen.dart';
-import 'view_model/image_view_model.dart';
+import 'image/image_screen.dart';
+import 'image/image_view_model.dart';
 
 void main() {
   runApp(MyApp());
