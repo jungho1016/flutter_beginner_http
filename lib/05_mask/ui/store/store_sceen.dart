@@ -29,12 +29,8 @@ class StoreSceen extends StatelessWidget {
           ? loadingWidget()
           : ListView(
               children: viewModel.stores.map((e) {
-                return ListTile(
-                  title: Text(e.name),
-                  subtitle: Text(e.addr),
-                  trailing: RemainStatWidget(
-                    store: e,
-                  ),
+                return RemainStatWidget(
+                  store: e,
                 );
               }).toList(),
             ),

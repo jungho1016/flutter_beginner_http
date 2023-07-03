@@ -2,8 +2,8 @@ class Store {
   String addr;
   String code;
   String createdAt;
-  num lat;
-  num lng;
+  double lat;
+  double lng;
   String name;
   String remainStat;
   String stockAt;
