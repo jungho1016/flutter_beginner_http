@@ -1,4 +1,4 @@
-class Stores {
+class Store {
   String addr;
   String code;
   String createdAt;
@@ -9,7 +9,7 @@ class Stores {
   String stockAt;
   String type;
 
-  Stores({
+  Store({
     required this.addr,
     required this.code,
     required this.createdAt,
@@ -21,16 +21,16 @@ class Stores {
     required this.type,
   });
 
-  factory Stores.fromJson(Map<String, dynamic> json) {
-    return Stores(
+  factory Store.fromJson(Map<String, dynamic> json) {
+    return Store(
       addr: json['addr'],
       code: json['code'],
-      createdAt: json['created_at'],
+      createdAt: json['created_at'] ?? '',
       lat: json['lat'],
       lng: json['lng'],
       name: json['name'],
-      remainStat: json['remain_stat'],
-      stockAt: json['stock_at'],
+      remainStat: json['remain_stat'] ?? '매진',
+      stockAt: json['stock_at'] ?? '',
       type: json['type'],
     );
   }
