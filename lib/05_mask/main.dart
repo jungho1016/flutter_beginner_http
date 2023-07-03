@@ -66,20 +66,69 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('마스크 재고 있는곳 : ${stores.length}곳'),
+        title: Text(
+            '마스크 재고 있는곳 : ${stores.where((e) => e.remainStat == 'plenty' || e.remainStat == 'some' || e.remainStat == 'few').length}곳'),
         actions: [IconButton(onPressed: fetch, icon: Icon(Icons.refresh))],
       ),
       body: isLoading
           ? loadingWidget()
           : ListView(
-              children: stores.map((e) {
+              children: stores
+                  .where((e) =>
+                      e.remainStat == 'plenty' ||
+                      e.remainStat == 'some' ||
+                      e.remainStat == 'few')
+                  .map((e) {
                 return ListTile(
                   title: Text(e.name),
                   subtitle: Text(e.addr),
-                  trailing: Text(e.remainStat),
+                  trailing: _buildRemainStat(e),
                 );
               }).toList(),
             ),
+    );
+  }
+
+  Widget _buildRemainStat(Store store) {
+    String remainStat = '판매중지';
+    String description = '판매중지';
+    Color color = Colors.black;
+    switch (store.remainStat) {
+      case 'plenty':
+        remainStat = '충분';
+        description = '100개 이상';
+        color = Colors.green;
+        break;
+      case 'some':
+        remainStat = '보통';
+        description = '30 ~ 100개';
+        color = Colors.yellow;
+        break;
+      case 'few':
+        remainStat = '부족';
+        description = '2개 ~ 30개';
+        color = Colors.red;
+        break;
+      case 'empty':
+        remainStat = '소진 임박';
+        description = '1개 이하';
+        color = Colors.grey;
+        break;
+    }
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          remainStat,
+          style: TextStyle(color: color, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          description,
+          style: TextStyle(color: color),
+        )
+      ],
     );
   }
 
