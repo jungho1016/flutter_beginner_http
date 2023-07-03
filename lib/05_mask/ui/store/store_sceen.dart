@@ -12,28 +12,43 @@ class StoreSceen extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = context.watch<StoreViewModel>();
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '마스크 재고 있는곳 : ${viewModel.stores.length}곳',
+        appBar: AppBar(
+          title: Text(
+            '마스크 재고 있는곳 : ${viewModel.stores.length}곳',
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                viewModel.fetch();
+              },
+              icon: Icon(Icons.refresh),
+            )
+          ],
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              viewModel.fetch();
-            },
-            icon: Icon(Icons.refresh),
-          )
-        ],
-      ),
-      body: viewModel.isLoading
-          ? loadingWidget()
-          : ListView(
-              children: viewModel.stores.map((e) {
-                return RemainStatWidget(
-                  store: e,
-                );
-              }).toList(),
-            ),
+        body: _buildBody(viewModel));
+  }
+
+  Widget _buildBody(StoreViewModel storeModel) {
+    if (storeModel.isLoading == true) {
+      return loadingWidget();
+    }
+    if (storeModel.stores.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('반경 5km 이내에 재고가 있는 매장이 없습니다.'),
+            Text('인터넷이 연결 되어 있는지 확인해주세요.'),
+          ],
+        ),
+      );
+    }
+    return ListView(
+      children: storeModel.stores.map((e) {
+        return RemainStatWidget(
+          store: e,
+        );
+      }).toList(),
     );
   }
 
