@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_beginner/05_mask/ui/store/store_widget.dart';
 import 'package:provider/provider.dart';
-
-import '../../data/model/model.dart';
 import 'store_view_model.dart';
 
 class StoreSceen extends StatelessWidget {

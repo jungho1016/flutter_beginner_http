@@ -24,7 +24,6 @@ class RemainStatWidget extends StatelessWidget {
         _launchUrl(store.lat, store.lng);
       },
     );
-    ;
   }
 
   Widget _buildRemainStat(Store store) {
