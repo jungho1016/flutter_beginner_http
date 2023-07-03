@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_beginner/04_image_search_01/data/model/photo.dart';
 import 'package:flutter_beginner/04_image_search_01/data/repository/photo_repository_impl.dart';
-import 'package:provider/provider.dart';
 
 class MainViewModel with ChangeNotifier {
   PhotoRepositoryImple _repository = PhotoRepositoryImple();

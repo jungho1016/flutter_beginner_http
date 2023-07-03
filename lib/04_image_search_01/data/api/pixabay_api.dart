@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'package:flutter_beginner/04_image_search_01/data/dto/pixabay_result_dto.dart';
 import 'package:http/http.dart' as http;
 
-import '../repository/photo_repository_impl.dart';
-
 class PixbayApi {
   Future<PixabayResultDto> getImages(String query) async {
     final url =

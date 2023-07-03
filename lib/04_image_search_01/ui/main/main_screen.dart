@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_beginner/04_image_search/ui/image/image_state.dart';
 import 'package:flutter_beginner/04_image_search_01/ui/detail/detail_screen.dart';
 import 'package:flutter_beginner/04_image_search_01/ui/main/main_view_model.dart';
 import 'package:provider/provider.dart';
