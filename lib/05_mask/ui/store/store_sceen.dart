@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_beginner/05_mask/ui/store/store_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/model/model.dart';
@@ -13,7 +14,8 @@ class StoreSceen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            '마스크 재고 있는곳 : ${viewModel.stores.where((e) => e.remainStat == 'plenty' || e.remainStat == 'some' || e.remainStat == 'few').length}곳'),
+          '마스크 재고 있는곳 : ${viewModel.stores.length}곳',
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -26,62 +28,16 @@ class StoreSceen extends StatelessWidget {
       body: viewModel.isLoading
           ? loadingWidget()
           : ListView(
-              children: viewModel.stores
-                  .where((e) =>
-                      e.remainStat == 'plenty' ||
-                      e.remainStat == 'some' ||
-                      e.remainStat == 'few')
-                  .map((e) {
+              children: viewModel.stores.map((e) {
                 return ListTile(
                   title: Text(e.name),
                   subtitle: Text(e.addr),
-                  trailing: _buildRemainStat(e),
+                  trailing: RemainStatWidget(
+                    store: e,
+                  ),
                 );
               }).toList(),
             ),
-    );
-  }
-
-  Widget _buildRemainStat(Store store) {
-    String remainStat = '판매중지';
-    String description = '판매중지';
-    Color color = Colors.black;
-    switch (store.remainStat) {
-      case 'plenty':
-        remainStat = '충분';
-        description = '100개 이상';
-        color = Colors.green;
-        break;
-      case 'some':
-        remainStat = '보통';
-        description = '30 ~ 100개';
-        color = Colors.yellow;
-        break;
-      case 'few':
-        remainStat = '부족';
-        description = '2개 ~ 30개';
-        color = Colors.red;
-        break;
-      case 'empty':
-        remainStat = '소진 임박';
-        description = '1개 이하';
-        color = Colors.grey;
-        break;
-    }
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          remainStat,
-          style: TextStyle(color: color, fontWeight: FontWeight.bold),
-        ),
-        Text(
-          description,
-          style: TextStyle(color: color),
-        )
-      ],
     );
   }
 
