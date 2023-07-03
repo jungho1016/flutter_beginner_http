@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../model/model.dart';
 
 class StoreRepository {
-  Future<List<Store>> fetch() async {
+  Future<List<Store>> fetch(double latitude, double longitude) async {
     bool isLoading = false;
     List<Store> stores = [];
 

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'ui/store/store_sceen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(ChangeNotifierProvider(
       create: (BuildContext context) {
         return StoreViewModel();
