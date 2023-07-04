@@ -2,7 +2,7 @@ import 'package:flutter_beginner/04_image_search_02/data/dto/PixabayResultDto.da
 import 'package:flutter_beginner/04_image_search_02/data/model/photo.dart';
 
 extension ToPhoto on Hits {
-  Photo tophoto() {
+  Photo toPhoto() {
     return Photo(
         id: id ?? 0,
         type: type ?? '',
