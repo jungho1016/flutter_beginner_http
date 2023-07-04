@@ -13,7 +13,8 @@ class PixabayPhotoRepositoryImpl implements PhotoRepository {
     if (resultDto.hits == null) {
       return [];
     }
-
+    print(resultDto.hits!.map((e) => e.toPhoto()).toList());
+    print(resultDto.hits!.map((e) => e.toPhoto()).toList().runtimeType);
     return resultDto.hits!.map((e) => e.toPhoto()).toList();
   }
 }
