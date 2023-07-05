@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_beginner/04_image_search_03/data/repository/photo_repository.dart';
 
-import '../../data/model/photo.dart';
 import 'main_state.dart';
 
 class MainViewModel with ChangeNotifier {
@@ -10,7 +9,7 @@ class MainViewModel with ChangeNotifier {
   MainState _state = const MainState();
   MainState get state => _state;
 
-  Future<void> fetch(String query) async {
+  Future<void> fetchImages(String query) async {
     _state.copyWith(isLoading: true);
     notifyListeners();
 
